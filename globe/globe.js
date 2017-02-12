@@ -149,7 +149,7 @@ DAT.Globe = function(container, opts) {
     container.appendChild(renderer.domElement);
 
     container.addEventListener('mousedown', onMouseDown, false);
-
+    container.addEventListener('dblclick', onDoubleClick, false);
     container.addEventListener('mousewheel', onMouseWheel, false);
 
     document.addEventListener('keydown', onDocumentKeyDown, false);
@@ -339,7 +339,51 @@ DAT.Globe = function(container, opts) {
     container.removeEventListener('mouseout', onMouseOut, false);
     container.style.cursor = 'auto';
   }
+  
+  function onDoubleClick(event) {
+        event.preventDefault();
 
+        var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight) * 2 + 1, 0.5 );
+
+//        projector.unprojectVector( vector, camera );
+
+        var ray = new THREE.Ray(camera.position, vector.subSelf(camera.position).normalize());
+
+        var intersects = ray.intersectObject(globe3d);
+
+        if (intersects.length > 0) {
+
+            object = intersects[0];
+
+            console.log(object);
+            r = object.object.boundRadius;
+            x = object.point.x;
+            y = object.point.y;
+            z = object.point.z;
+
+//            lat = 90-180*Math.acos(z/r)/Math.PI;
+//            lon = 180*(Math.atan(x/y))/Math.PI;
+
+//            lat=180*Math.atan2(z,Math.sqrt(x*x+y*y))/Math.PI;
+//            lon=180*Math.atan2(y,x)/Math.PI;
+
+            lat = 90 - (Math.acos(y / r)) * 180 / Math.PI;
+            lon = ((270 + (Math.atan2(x, z)) * 180 / Math.PI) % 360) - 180;
+
+            console.log(lat);
+            console.log(lon);
+//            console.log(rotation);
+
+            lat = Math.round(lat*100000)/100000;
+            lon = Math.round(lon*100000)/100000;
+
+            window.open("https://maps.google.com/maps?q="+lat+","+lon);
+
+        }
+    }
+  
+  
+  
   function onMouseOut(event) {
     container.removeEventListener('mousemove', onMouseMove, false);
     container.removeEventListener('mouseup', onMouseUp, false);
