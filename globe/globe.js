@@ -18,7 +18,7 @@ DAT.Globe = function(container, opts) {
   
   var colorFn = opts.colorFn || function(x) {
     var c = new THREE.Color();
-    c.setHSL( ( 100 - ( x * 0.5 ) ), 0.1, 0.1 );
+    c.setHSL( ( 1.0 - ( x * 0.5 ) ), 1.0, 1.0 );
     return c;
   };
   var imgDir = opts.imgDir || '/Users/danielnguyen/Documents/Dnguy104.github.io/globe';
