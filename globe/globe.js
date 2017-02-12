@@ -69,7 +69,7 @@ DAT.Globe = function(container, opts) {
   };
 
   var camera, scene, renderer, w, h;
-  var mesh, atmosphere, point;
+  var mesh, atmosphere, point, vector,globe3d;
 
   var overRenderer;
 
@@ -96,9 +96,10 @@ DAT.Globe = function(container, opts) {
 
     camera = new THREE.PerspectiveCamera(30, w / h, 1, 10000);
     camera.position.z = distance;
-
+    vector = new THREE.Vector3();
     scene = new THREE.Scene();
-
+    
+    
     var geometry = new THREE.SphereGeometry(200, 40, 30);
 
     shader = Shaders['earth'];
@@ -117,7 +118,11 @@ DAT.Globe = function(container, opts) {
     mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.y = Math.PI;
     scene.add(mesh);
+    globe3d = mesh;
 
+    projector = new THREE.Projector();
+    
+    
     shader = Shaders['atmosphere'];
     uniforms = THREE.UniformsUtils.clone(shader.uniforms);
 
@@ -285,38 +290,6 @@ DAT.Globe = function(container, opts) {
 
     container.style.cursor = 'move';
   }
-
-  function onClick(event) {
-        event.preventDefault();
-
-        var canvas = renderer.domElement;
-        var vector = new THREE.Vector3( ( (event.clientX) / canvas.width ) * 2 - 1, - ( (event.clientY) / canvas.height) * 2 + 1,
-        0.5 );
-
-        projector.unprojectVector( vector, camera );
-
-        var ray = new THREE.Ray(camera.position, vector.subSelf(camera.position).normalize());
-
-        var intersects = ray.intersectObject(globe3d);
-
-        if (intersects.length > 0) {
-
-            object = intersects[0];
-
-            r = object.object.boundRadius;
-            x = object.point.x;
-            y = object.point.y;
-            z = object.point.z;
-
-            lat = 90 - (Math.acos(y / r)) * 180 / Math.PI;
-            lon = ((270 + (Math.atan2(x, z)) * 180 / Math.PI) % 360) - 180;
-
-            lat = Math.round(lat * 100000) / 100000;
-            lon = Math.round(lon * 100000) / 100000;
-            window.location.href = 'gmaps?lat='+lat+'&lon='+lon;
-
-        }
-    }
 
 
 
