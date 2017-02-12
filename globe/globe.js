@@ -320,7 +320,7 @@ DAT.Globe = function(container, opts) {
 
 //        projector.unprojectVector( vector, camera );
 
-        var ray = new THREE.Ray(camera.position, vector.sub(camera.position).normalize());
+        var raycaster = new THREE.Ray(camera.position, vector.sub(camera.position).normalize());
 
         var intersects = raycaster.intersectObject(globe3d);
 
