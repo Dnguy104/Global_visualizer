@@ -290,7 +290,7 @@ DAT.Globe = function(container, opts) {
         event.preventDefault();
 
         var canvas = renderer.domElement;
-        var vector = new THREE.Vector3( ( (event.offsetX) / canvas.width ) * 2 - 1, - ( (event.offsetY) / canvas.height) * 2 + 1,
+        var vector = new THREE.Vector3( ( (event.clientX) / canvas.width ) * 2 - 1, - ( (event.clientY) / canvas.height) * 2 + 1,
         0.5 );
 
         projector.unprojectVector( vector, camera );
