@@ -18,10 +18,10 @@ DAT.Globe = function(container, opts) {
   
   var colorFn = opts.colorFn || function(x) {
     var c = new THREE.Color();
-    c.setHSL( (  ( x  ) ), 1.0, 1.0 );
+    c.setHSL( (  ( 0.6 - ( x * 0.5 ) ), 1.0, 1.0 );
     return c;
   };
-  var imgDir = '/Users/danielnguyen/Documents/Dnguy104.github.io/globe/';
+  var imgDir = opts.imgDir || '/Users/danielnguyen/Documents/Dnguy104.github.io/globe/';
 
   var Shaders = {
     'earth' : {
