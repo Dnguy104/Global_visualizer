@@ -150,12 +150,12 @@
 </a>
 
 <div class="dropdown">
-<button onclick="myFunction()" class="dropbtn" onmousedown="this.value='';" onchange="GET_INFO(this.value[0],this.value[0]);"> Dropdown </button>
+<button onclick="myFunction()" class="dropbtn" onmousedown="this.value='';" > Dropdown </button>
   <div id="myDropdown" class="dropdown-content">
     <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-   <select> 
-
-    <option value="{'foo': 34.98300013,'bar': 63.13329964}">Qal eh-ye Now</options>
+   <select onchange="GET_INFO(this)" > 
+      
+    <option value="{foo: 34.98300013,bar: 63.13329964}">Qal eh-ye Now</options>
 <option value="{'foo': 34.5167011,'bar': 65.25000063}">Chaghcharan</options>
 <option value="{'foo': 31.58299802,'bar': 64.35999955}">Lashkar Gah</options>
 <option value="{'foo': 31.11200108,'bar': 61.88699752}">Zaranj</options>
@@ -7536,6 +7536,13 @@ function filterFunction() {
         }
     }
 }
+
+function GET_INFO(info) {
+  var val = JSON.parse(info.value);
+  window.alert("latitutide" + val.foo);
+  
+}
+
 
 
 </script>
