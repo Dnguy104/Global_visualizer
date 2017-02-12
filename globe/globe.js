@@ -21,7 +21,7 @@ DAT.Globe = function(container, opts) {
     c.setHSL( (  ( x  ) ), 1.0, 1.0 );
     return c;
   };
-  var imgDir = opts.imgDir || '/Users/danielnguyen/Documents/Dnguy104.github.io/globe/';
+  var imgDir = '/Users/danielnguyen/Documents/Dnguy104.github.io/globe/';
 
   var Shaders = {
     'earth' : {
