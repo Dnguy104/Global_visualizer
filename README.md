@@ -4,4 +4,4 @@
 
 #We used WebGL to render a 3d model of the globe, then plotted population data of thousands of major cities on the render. Github pages was used to host the webpage from a local repository. Various javascript modules and python scripts were used with the wolfram alpha api to webs-crape for statistical data.
 
-![What the project looks like](Dnguy104.github.io/Screen Shot 2017-05-31 at 12.26.41 PM.png)
+![What the project looks like](Dnguy104.github.io/globe.png)
